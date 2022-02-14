@@ -78,9 +78,9 @@ extension HomeViewController {
     
     func navigationConfigurations() {
         title = "Mooviely"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .red
         navigationItem.searchController = searchController
     }
 }
