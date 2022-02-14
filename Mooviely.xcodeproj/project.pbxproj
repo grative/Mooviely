@@ -19,6 +19,8 @@
 		36C8D43527B9BB5700644F73 /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C8D43427B9BB5700644F73 /* TitleViewModel.swift */; };
 		36C8D43727B9D8BA00644F73 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C8D43627B9D8BA00644F73 /* SearchResultsViewController.swift */; };
 		36C8D43A27B9DD0C00644F73 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C8D43927B9DD0C00644F73 /* TitleCollectionViewCell.swift */; };
+		36C8D44127BA399000644F73 /* TitlePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C8D44027BA399000644F73 /* TitlePreviewViewController.swift */; };
+		36C8D44327BA480E00644F73 /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C8D44227BA480E00644F73 /* TitlePreviewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		36C8D43427B9BB5700644F73 /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		36C8D43627B9D8BA00644F73 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		36C8D43927B9DD0C00644F73 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		36C8D44027BA399000644F73 /* TitlePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewController.swift; sourceTree = "<group>"; };
+		36C8D44227BA480E00644F73 /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +72,10 @@
 		36C8D40A27B91F9800644F73 /* Mooviely */ = {
 			isa = PBXGroup;
 			children = (
+				36C8D42A27B992D800644F73 /* Managers */,
 				36C8D42D27B993F100644F73 /* Model */,
 				36C8D43827B9DBFE00644F73 /* ViewModel */,
 				36C8D43027B9B3A900644F73 /* View */,
-				36C8D42A27B992D800644F73 /* Managers */,
 				36C8D42027B9200C00644F73 /* Controllers */,
 				36C8D43327B9B60800644F73 /* Resources */,
 				36C8D41927B91F9A00644F73 /* Info.plist */,
@@ -109,6 +113,7 @@
 			children = (
 				36C8D43127B9B3F100644F73 /* TitleTableViewCell.swift */,
 				36C8D43927B9DD0C00644F73 /* TitleCollectionViewCell.swift */,
+				36C8D44027BA399000644F73 /* TitlePreviewViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				36C8D43427B9BB5700644F73 /* TitleViewModel.swift */,
+				36C8D44227BA480E00644F73 /* TitlePreviewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -210,7 +216,9 @@
 			files = (
 				36C8D42F27B9941100644F73 /* Title.swift in Sources */,
 				36C8D43727B9D8BA00644F73 /* SearchResultsViewController.swift in Sources */,
+				36C8D44127BA399000644F73 /* TitlePreviewViewController.swift in Sources */,
 				36C8D40C27B91F9800644F73 /* AppDelegate.swift in Sources */,
+				36C8D44327BA480E00644F73 /* TitlePreviewViewModel.swift in Sources */,
 				36C8D40E27B91F9800644F73 /* SceneDelegate.swift in Sources */,
 				36C8D42C27B992EB00644F73 /* APICaller.swift in Sources */,
 				36C8D43527B9BB5700644F73 /* TitleViewModel.swift in Sources */,

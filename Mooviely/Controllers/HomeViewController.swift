@@ -77,8 +77,8 @@ extension HomeViewController {
 extension HomeViewController {
     
     func navigationConfigurations() {
-        title = "Home"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Mooviely"
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.tintColor = .black
         navigationItem.searchController = searchController
@@ -109,18 +109,51 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let title = titles[indexPath.row]
-        cell.fetchingTableViewCellItems(with: TitleViewModel(titleName: title.original_title ?? "Error Detected.", posterURL: title.poster_path ?? "Error Detected."))
+        cell.fetchingTableViewCellItems(with: TitleViewModel(titleName: title.original_title ?? "Error Detected.",
+                                                             posterURL: title.poster_path ?? "Error Detected.",
+                                                             overview: title.overview ?? "Error Detected.",
+                                                             release_date: title.release_date ?? "Error Detected."))
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        
+        guard let titleName = title.original_title ?? title.original_name else {
+            return
+        }
+        
+        
+        APICaller.shared.getMovie(with: titleName) { [weak self] result in
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    let vc = TitlePreviewViewController()
+                    vc.fetchingTableViewCellItems(with: TitlePreviewViewModel(title: title.original_title ?? "",
+                                                                              posterURL: title.poster_path ?? "" ,
+                                                                              titleOverview: title.overview ?? "",
+                                                                              release_date: title.release_date ?? ""))
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
 }
 
 //MARK: - UICollectionView Delegate and DataSources
 
-extension HomeViewController: UISearchResultsUpdating {
+extension HomeViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -132,6 +165,8 @@ extension HomeViewController: UISearchResultsUpdating {
                 let resultsController = searchController.searchResultsController as? SearchResultsViewController else {
                     return
                 }
+        resultsController.delegate = self
+        
         APICaller.shared.search(with: query) { result in
             DispatchQueue.main.async {
                 switch result {
@@ -143,6 +178,15 @@ extension HomeViewController: UISearchResultsUpdating {
                 }
             }
             
+        }
+    }
+    
+    func searchResultsViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel) {
+        
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.fetchingTableViewCellItems(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

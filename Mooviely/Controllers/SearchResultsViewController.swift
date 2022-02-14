@@ -1,8 +1,13 @@
 import UIKit
 
+protocol SearchResultsViewControllerDelegate: AnyObject {
+    func searchResultsViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel)
+}
 class SearchResultsViewController: UIViewController {
     
     public var titles: [TitleResult] = [TitleResult]()
+    
+    public weak var delegate: SearchResultsViewControllerDelegate?
     
     public let searchResultsCollectionView: UICollectionView = {
         
@@ -64,6 +69,27 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        let titleName = title.original_title ?? ""
+        APICaller.shared.getMovie(with: titleName) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.delegate?.searchResultsViewControllerDidTapItem(TitlePreviewViewModel(title: title.original_title ?? "",
+                                                                                            posterURL: title.poster_path ?? "",
+                                                                                            titleOverview: title.overview ?? "",
+                                                                                            release_date: title.release_date ?? ""))
+
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+
+    }
 
 }
 
